@@ -44,7 +44,8 @@ def main():
     count = 0
     for company in u100:
         for name in na_names:
-            if name.find(company + " ") == 0:
+            if name.find(" " + company + " ") != -1 or name.find(company + " ") == 0:
+            #if company in name:
                 #print company, name
                 #time.sleep(1)
                 count += 1
@@ -57,9 +58,10 @@ def main():
     print "NA: ", len(na)
     print "u100: ", len(u100)
 
-    with open('na_match.csv', 'wb') as outFILE:
+    with open('na_match_long.csv', 'wb') as outFILE:
         outwriter = csv.writer(outFILE, delimiter=',')
 
+        outwriter.writerow(['UNIFY100 NAME', 'NA NAME', 'NA ID'])
         for i in output:
             outwriter.writerow(i)
 
